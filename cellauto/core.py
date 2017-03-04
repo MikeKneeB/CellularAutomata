@@ -39,19 +39,6 @@ class Grid(object):
         self.grid = np.zeros((self.y_size, self.x_size), dtype=np.int)
 
     def evolve(self):
-        # new_grid = np.copy(self.grid)
-        # for i, row in enumerate(self.grid):
-        #     for j, item in enumerate(row):
-        #         neighbours = self.count_neighbours(i, j)
-        #         if item == 1:
-        #             if neighbours < 2:
-        #                 new_grid[i][j] = 0
-        #             elif neighbours > 3:
-        #                 new_grid[i][j] = 0
-        #         else:
-        #             if neighbours == 3:
-        #                 new_grid[i][j] = 1
-        # self.grid = np.copy(new_grid)
         pass
 
     def char_map(self, y, x):
@@ -73,6 +60,8 @@ class GridWin():
         curses.cbreak()
         curses.curs_set(0)
         self.stdscr.keypad(1)
+
+        self.title = ""
 
         self.win_coords = self.stdscr.getmaxyx()
 
@@ -129,6 +118,7 @@ class GridWin():
             self.game_grid.rebuild(self.win_coords[0] - 2, self.win_coords[1] - 2)
         hori_bar = "#"*(self.game_grid.x_size)
         self.stdscr.addstr(0, 1, hori_bar)
+        self.stdscr.addstr(0, 2, self.title)
         for i, row in enumerate(self.game_grid.grid):
             self.stdscr.addstr(i+1, 0, '#')
             for j, item in enumerate(row):
@@ -139,6 +129,7 @@ class GridWin():
         self.stdscr.refresh()
 
     def edit_grid(self):
+        self.title = "Editting"
         curses.curs_set(1)
         self.stdscr.move(1,1)
         cursor_pos = [0, 0]
@@ -193,6 +184,7 @@ class GridWin():
     def run_grid(self, time_delay=0.05):
         self.stdscr.nodelay(True)
         while True:
+            self.title = "Running"
             self.draw_grid()
             command = self.stdscr.getch()
             if command == 113:
@@ -206,6 +198,8 @@ class GridWin():
                     self.stdscr.nodelay(False)
                     return
             elif command == 112:
+                self.title = "Paused"
+                self.draw_grid()
                 self.stdscr.nodelay(False)
                 while True:
                     command = self.stdscr.getch()
@@ -236,8 +230,11 @@ class GridWin():
             time.sleep(time_delay)
 
     def run_prog(self):
-        if self.draw_welcome() == 0:
-            self.run_grid()
+        while True:
+            if self.draw_welcome() == 0:
+                self.run_grid()
+            else:
+                break
 
 
 # def main():

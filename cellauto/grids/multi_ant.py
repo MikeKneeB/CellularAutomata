@@ -29,7 +29,7 @@ class MultiAntGrid(Grid):
         for i in range(self.ant_number):
             self.ant_y_list[i] = rm.randint(0, self.y_size - 1)
             self.ant_x_list[i] = rm.randint(0, self.x_size - 1)
-            self.ant_dir_list[i] = 0
+            self.ant_dir_list[i] = rm.randint(0, 3)
             self.grid[self.ant_y_list[i]][self.ant_x_list[i]] = 3
 
     def clear_grid(self):

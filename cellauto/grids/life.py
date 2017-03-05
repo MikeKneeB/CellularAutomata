@@ -26,20 +26,20 @@ class LifeGrid(Grid):
         total = 0
         if x > 0:
             if y > 0:
-                total += self.grid[y-1][x-1]
-            total += self.grid[y][x-1]
+                total += self.grid[y-1][x-1] if self.grid[y-1][x-1] == 1 else 0
+            total += self.grid[y][x-1] if self.grid[y][x-1] == 1 else 0
             if y < len(self.grid)-1:
-                total += self.grid[y+1][x-1]
+                total += self.grid[y+1][x-1] if self.grid[y+1][x-1] == 1 else 0
         if y > 0:
-            total += self.grid[y-1][x]
+            total += self.grid[y-1][x] if self.grid[y-1][x] == 1 else 0
         if y < len(self.grid)-1:
-            total += self.grid[y+1][x]
+            total += self.grid[y+1][x] if self.grid[y+1][x] == 1 else 0
         if x < len(self.grid[0])-1:
             if y > 0:
-                total += self.grid[y-1][x+1]
-            total += self.grid[y][x+1]
+                total += self.grid[y-1][x+1] if self.grid[y-1][x+1] == 1 else 0
+            total += self.grid[y][x+1] if self.grid[y][x+1] == 1 else 0
             if y < len(self.grid)-1:
-                total += self.grid[y+1][x+1]
+                total += self.grid[y+1][x+1] if self.grid[y+1][x+1] == 1 else 0
         return total
 
     def char_map(self, y, x):

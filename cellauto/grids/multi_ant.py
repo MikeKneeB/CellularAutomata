@@ -116,9 +116,16 @@ class MultiAntGrid(Grid):
                 del self.ant_dir_list[index]
                 self.ant_number -= 1
             self.grid[y][x] = 1
-        elif code == 118:
+        elif code == 119 or 97 or 115 or 100:
             self.ant_y_list.append(y)
             self.ant_x_list.append(x)
-            self.ant_dir_list.append(0)
             self.ant_number += 1
             self.grid[y][x] = 3
+            if code == 119:
+                self.ant_dir_list.append(0)
+            elif code == 97:
+                self.ant_dir_list.append(3)
+            elif code == 115:
+                self.ant_dir_list.append(2)
+            else:
+                self.ant_dir_list.append(1)

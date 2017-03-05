@@ -3,6 +3,8 @@ import random as rm
 import curses
 import time
 
+import cellauto.grids
+
 class Grid(object):
 
     def __init__(self, y_size, x_size):
@@ -88,6 +90,33 @@ class GridWin():
             if self.stdscr.getmaxyx() != self.win_coords:
                 self.win_coords = self.stdscr.getmaxyx()
             self.stdscr.addstr(1,1, 'WELCOME TO THE GAME OF LIFE')
+            self.stdscr.addstr(3,1, 'Please choose a game:')
+            self.stdscr.addstr(4,2, '1 - Life')
+            self.stdscr.addstr(5,2, '2 - Langton\'s Ant')
+            self.stdscr.addstr(6,2, '3 - Multi-Ant')
+            self.stdscr.addstr(7,2, 'h - Help')
+            self.stdscr.addstr(8,2, 'q - quit')
+            self.stdscr.refresh()
+            while True:
+                command = self.stdscr.getch()
+                if command == 49:
+                    self.add_game(cellauto.grids.life.LifeGrid(20, 20))
+                    break
+                elif command == 50:
+                    self.add_game(cellauto.grids.ant.AntGrid(20, 20))
+                    break
+                elif command == 51:
+                    self.add_game(cellauto.grids.multi_ant.MultiAntGrid(20,20))
+                    break
+                elif command == 104:
+                    pass
+                elif command == 113:
+                    return 1
+                else:
+                    self.stdscr.addstr(9,1, 'Command not recognised.')
+                    self.stdscr.refresh()
+            self.stdscr.clear()
+            self.stdscr.addstr(1,1, 'WELCOME TO THE GAME OF LIFE')
             self.stdscr.addstr(3,1, 'Please press a key:')
             self.stdscr.addstr(4,2, 'r - Random start')
             self.stdscr.addstr(5,2, 'e - Empty start')
@@ -102,6 +131,8 @@ class GridWin():
                 elif command == 101:
                     self.game_grid.clear_grid()
                     return 0
+                elif command == 104:
+                    pass
                 elif command == 113:
                     return 1
                 else:
@@ -235,14 +266,3 @@ class GridWin():
                 self.run_grid()
             else:
                 break
-
-
-# def main():
-#     lg = LifeGrid(10, 10)
-#
-#     with GridWin(lg) as disp:
-#         #lg.random_grid(0.2)
-#         disp.run_prog()
-#
-# if __name__ == '__main__':
-#     main()

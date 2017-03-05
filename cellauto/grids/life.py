@@ -4,8 +4,10 @@ from cellauto.core import Grid
 
 class LifeGrid(Grid):
 
-    def __init__(self, y_size, x_size):
+    def __init__(self, y_size, x_size, survive_list=[2,3], birth_list=[3]):
         Grid.__init__(self, y_size, x_size)
+        self.survive_list = survive_list
+        self.birth_list = birth_list
 
     def evolve(self):
         new_grid = np.copy(self.grid)
@@ -13,12 +15,10 @@ class LifeGrid(Grid):
             for j, item in enumerate(row):
                 neighbours = self.count_neighbours(i, j)
                 if item == 1:
-                    if neighbours < 2:
-                        new_grid[i][j] = 0
-                    elif neighbours > 3:
+                    if neighbours not in self.survive_list:
                         new_grid[i][j] = 0
                 else:
-                    if neighbours == 3:
+                    if neighbours in self.birth_list:
                         new_grid[i][j] = 1
         self.grid = np.copy(new_grid)
 

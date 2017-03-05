@@ -32,6 +32,8 @@ class AntGrid(Grid):
     def clear_grid(self):
         super(AntGrid, self).clear_grid()
         self.ant_dir = 0
+        self.ant_y = self.y_size/2
+        self.ant_x = self.x_size/2
         self.grid[self.ant_y][self.ant_x] = 3
 
     def rebuild(self, y_size, x_size):
@@ -77,8 +79,16 @@ class AntGrid(Grid):
             self.grid[y][x] = 0
         elif code == 99:
             self.grid[y][x] = 1
-        elif code == 118:
+        elif code == 119 or 100 or 115 or 97:
             self.grid[self.ant_y][self.ant_x] = 0
             self.ant_y = y
             self.ant_x = x
             self.grid[y][x] = 3
+            if code == 119:
+                self.ant_dir = 0
+            elif code == 97:
+                self.ant_dir = 3
+            elif code == 115:
+                self.ant_dir = 2
+            else:
+                self.ant_dir = 1

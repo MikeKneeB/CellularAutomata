@@ -6,8 +6,10 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.graphics import Color
 from kivy.graphics import Rectangle
 from kivy.clock import Clock
+from kivy.core.window import Window
 
 from cellauto.grids.life import LifeGrid
+from cellauto.grids.ant import AntGrid
 
 class CellGrid(Widget):
     def __init__(self, game_grid=None, **kwargs):
@@ -19,7 +21,7 @@ class CellGrid(Widget):
         self.cell_y = self.height / self.cell_size
 
         if game_grid == None:
-            self.game_grid = LifeGrid(10, 10)
+            self.game_grid = LifeGrid(50, 50, [1,2,5], [3,6])
         else:
             self.game_grid = game_grid
 
@@ -39,7 +41,8 @@ class CellGrid(Widget):
             for i, row in enumerate(self.game_grid.grid):
                 for j, item in enumerate(row):
                     if item != 0:
-                        Rectangle(pos=(j*self.cell_size,i*self.cell_size + 70), size=(self.cell_size, self.cell_size))
+                        Rectangle(pos=(j*self.cell_size,i*self.cell_size + 50), size=(self.cell_size, self.cell_size))
+
 
     def test_action(self):
         self.square_pos = (self.square_pos[0]+10, self.square_pos[1]+10)
@@ -76,7 +79,7 @@ class MainScreen(BoxLayout):
         self.orientation = 'vertical'
         self.grid = CellGrid(size_hint=(1,1))
         self.grid.bind(size=self.grid.size_callback)
-        self.cont = CellControl(self.grid, size=(200,70),size_hint=(1,None))
+        self.cont = CellControl(self.grid, size=(200,50), size_hint=(1,None))
         self.add_widget(self.grid)
         self.add_widget(self.cont)
 
@@ -87,7 +90,8 @@ class CellApp(App):
 
     def build(self):
         main = MainScreen()
-        Clock.schedule_interval(main.update, 1.0 / 2.0)
+        Clock.schedule_interval(main.update, 0.2)
+        Window.size = (400, 400)
         return main
 
 if __name__ == '__main__':

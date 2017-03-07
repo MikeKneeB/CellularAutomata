@@ -4,8 +4,8 @@ from cellauto.grids.life import LifeGrid
 
 class GeneGrid(LifeGrid):
 
-    def __init__(self, y_size, x_size, survive_list=[2,3], birth_list=[3], generations):
-        LifeGrid.__init__(self, y_size, x_sizem survive_list, birth_list)
+    def __init__(self, y_size, x_size, survive_list=[2,3], birth_list=[3], generations=2):
+        LifeGrid.__init__(self, y_size, x_size, survive_list, birth_list)
         self.generations = generations
 
     def evolve(self):

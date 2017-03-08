@@ -8,10 +8,12 @@ class Grid(object):
         self.y_size = y_size
 
         self.grid = np.zeros((y_size, x_size), dtype=np.int)
+        self.grid_count = y_size * x_size
 
     def rebuild(self, y_size, x_size):
         self.x_size = x_size
         self.y_size = y_size
+        self.grid_count = y_size * x_size
 
         new_grid = np.zeros((y_size, x_size), dtype=np.int)
 

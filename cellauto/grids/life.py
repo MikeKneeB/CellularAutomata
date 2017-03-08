@@ -9,6 +9,8 @@ class LifeGrid(Grid):
         self.survive_list = survive_list
         self.birth_list = birth_list
 
+        self.temp_grid = None
+
     def evolve(self):
         new_grid = np.copy(self.grid)
         for i, row in enumerate(self.grid):
@@ -21,6 +23,28 @@ class LifeGrid(Grid):
                     if neighbours in self.birth_list:
                         new_grid[i][j] = 1
         self.grid = np.copy(new_grid)
+
+    def step_evolve(self, i, j):
+        if i == 0 and j == 0:
+            self.temp_grid = np.copy(self.grid)
+        neighbours = self.count_neighbours(i, j)
+        if self.temp_grid[i][j] == 1:
+            if neighbours not in self.survive_list:
+                self.temp_grid[i][j] = 0
+                ret_val = 0
+            else:
+                ret_val = 1
+        else:
+            if neighbours in self.birth_list:
+                self.temp_grid[i][j] = 1
+                ret_val = 1
+            else:
+                ret_val = 0
+
+        if i == self.y_size - 1 and j == self.x_size - 1:
+            self.grid = np.copy(self.temp_grid)
+
+        return ret_val
 
     def count_neighbours(self, y, x):
         total = 0

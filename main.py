@@ -308,51 +308,6 @@ class CellControl(BoxLayout):
                         elif saved_selections.text == 'Mazectric':
                             self.cell_grid.game_grid.survive_list = [1,2,3,4]
                             self.cell_grid.game_grid.birth_list = [3]
-                    elif self.cell_grid.game_id == 1:
-                        if saved_selections.text == 'Brian\'s Brain':
-                            self.cell_grid.game_grid.survive_list = []
-                            self.cell_grid.game_grid.birth_list = [2]
-                            self.cell_grid.game_grid.generations = 3
-                        elif saved_selections.text == 'Cooties':
-                            self.cell_grid.game_grid.survive_list = [2,3]
-                            self.cell_grid.game_grid.birth_list = [2]
-                            self.cell_grid.game_grid.generations = 8
-                        elif saved_selections.text == "Star Wars":
-                            self.cell_grid.game_grid.survive_list = [3,4,5]
-                            self.cell_grid.game_grid.birth_list = [2]
-                            self.cell_grid.game_grid.generations = 4
-                        elif saved_selections.text == "Flaming Starbows":
-                            self.cell_grid.game_grid.survive_list = [3,4,7]
-                            self.cell_grid.game_grid.birth_list = [2,3]
-                            self.cell_grid.game_grid.generations = 8
-                        elif saved_selections.text == 'Lines':
-                            self.cell_grid.game_grid.survive_list = [0,1,2,3,4,5]
-                            self.cell_grid.game_grid.birth_list = [4,5,8]
-                            self.cell_grid.game_grid.generations = 3
-                        elif saved_selections.text == 'RainZha':
-                            self.cell_grid.game_grid.survive_list = [2]
-                            self.cell_grid.game_grid.birth_list = [2,3]
-                            self.cell_grid.game_grid.generations = 8
-                        elif saved_selections.text == 'Rake':
-                            self.cell_grid.game_grid.survive_list = [3,4,6,7]
-                            self.cell_grid.game_grid.birth_list = [2,6,7,8]
-                            self.cell_grid.game_grid.generations = 6
-                        elif saved_selections.text == 'Snake':
-                            self.cell_grid.game_grid.survive_list = [0,3,4,6,7]
-                            self.cell_grid.game_grid.birth_list = [2,5]
-                            self.cell_grid.game_grid.generations = 6
-                        elif saved_selections.text == 'Spirals':
-                            self.cell_grid.game_grid.survive_list = [2]
-                            self.cell_grid.game_grid.birth_list = [2,3,4]
-                            self.cell_grid.game_grid.generations = 5
-                        elif saved_selections.text == 'Sticks':
-                            self.cell_grid.game_grid.survive_list = [3,4,5,6]
-                            self.cell_grid.game_grid.birth_list = [2]
-                            self.cell_grid.game_grid.generations = 6
-                        elif saved_selections.text == 'Trippy':
-                            self.cell_grid.game_grid.survive_list = [1,4,5,6]
-                            self.cell_grid.game_grid.birth_list = [2,3,5,6]
-                            self.cell_grid.game_grid.generations = 13
             except ValueError:
                 pass
             popup.dismiss()
@@ -376,7 +331,7 @@ class CellControl(BoxLayout):
         if self.cell_grid.game_id == 1:
             title = 'Enter New Generation Rules'
             size = (320,130)
-            saved_selections.values = ('Manual Input', 'Brian\'s Brain', 'Cooties', 'Star Wars', 'Flaming Starbows', 'Lines', 'RainZha', 'Rake', 'Snake', 'Spirals', 'Sticks', 'Trippy')
+            saved_selections.values = ('Manual Input')
         elif self.cell_grid.game_id == 0:
             title = 'Enter New Survive and Create Rules'
             size = (300,130)
@@ -401,7 +356,7 @@ class MainScreen(BoxLayout):
 class CellApp(App):
     def build(self):
         main = MainScreen()
-        Window.size = (420, 470)
+        #Window.size = (450, 500)
         return main
 
 if __name__ == '__main__':

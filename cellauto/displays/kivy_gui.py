@@ -308,6 +308,9 @@ class CellControl(BoxLayout):
                         elif saved_selections.text == 'Mazectric':
                             self.cell_grid.game_grid.survive_list = [1,2,3,4]
                             self.cell_grid.game_grid.birth_list = [3]
+                        elif saved_selections.text == 'Carpet':
+                            self.cell_grid.game_grid.survive_list = [1]
+                            self.cell_grid.game_grid.birth_list = [1,2,3]
                     elif self.cell_grid.game_id == 1:
                         if saved_selections.text == 'Brian\'s Brain':
                             self.cell_grid.game_grid.survive_list = []
@@ -380,7 +383,7 @@ class CellControl(BoxLayout):
         elif self.cell_grid.game_id == 0:
             title = 'Enter New Survive and Create Rules'
             size = (300,130)
-            saved_selections.values = ('Manual Input', 'Conway\'s Life', '34 Life', '2x2 Life', 'Gnarl', 'HighLife', 'Maze', 'Mazectric', 'Psuedo Life', 'Serviettes', 'Cities')
+            saved_selections.values = ('Manual Input', 'Conway\'s Life', '34 Life', '2x2 Life', 'Gnarl', 'HighLife', 'Maze', 'Mazectric', 'Psuedo Life', 'Serviettes', 'Cities', 'Carpet')
 
         content.add_widget(saved_selections)
         content.add_widget(content_manual)
@@ -400,6 +403,7 @@ class MainScreen(BoxLayout):
 
 class CellApp(App):
     def build(self):
+        self.icon = 'logo.png'
         main = MainScreen()
         Window.size = (420, 470)
         return main
